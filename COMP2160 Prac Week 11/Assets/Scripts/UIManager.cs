@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
 #region Update
     void Update()
     {
+        CameraZoom();
         MoveCrosshair();
         SelectTarget();
     }
@@ -87,6 +88,15 @@ public class UIManager : MonoBehaviour
             hitFloor.y = 0;
                 crosshair.position = hitFloor;
         }
+    }
+
+    private void CameraZoom()
+    {
+        Vector2 zoomVal = deltaAction.ReadValue<Vector2>();
+        //Debug.Log(zoomVal);
+        Vector3 changedVal = Camera.main.transform.position;
+        changedVal.y = changedVal.y + zoomVal.y;
+        Camera.main.transform.position = changedVal;
     }
 
     private void SelectTarget()
